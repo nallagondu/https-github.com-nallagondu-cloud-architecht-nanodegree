@@ -1,0 +1,50 @@
+ .ssh  ssh -i "cend-key.pem" ec2-user@ec2-3-93-192-117.compute-1.amazonaws.com                  ✔
+
+Last login: Sat Jun 20 01:17:22 2020 from ppp-82-135-70-86.dynamic.mnet-online.de
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+4 package(s) needed for security, out of 10 available
+Run "sudo yum update" to apply all updates.
+-bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
+[ec2-user@ip-10-1-11-247 ~]$ mysql -h database-1.cale7yl06n8b.us-east-1.rds.amazonaws.com -P 3306 -u admin -padmin123 udacity
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 33
+Server version: 5.7.22-log Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [udacity]> show tables;
+Empty set (0.00 sec)
+
+MySQL [udacity]> create table cend_test (id int auto increment, value varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto increment, value varchar(20))' at line 1
+MySQL [udacity]> create table cend_test (id int auto_increment, value varchar(20));
+ERROR 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
+MySQL [udacity]> create table cend_test (id int auto_increment, value varchar(20), primary key (id));
+Query OK, 0 rows affected (0.07 sec)
+
+MySQL [udacity]> select * from cend_test;
+Empty set (0.00 sec)
+
+MySQL [udacity]> insert into cend_test (value) values ("this works");
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [udacity]> insert into cend_test (value) values ("adding another stmt");
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+MySQL [udacity]> select * from cend_test;
++----+----------------------+
+| id | value                |
++----+----------------------+
+|  1 | this works           |
+|  2 | adding another stmt  |
++----+----------------------+
+2 rows in set (0.00 sec)
+
+MySQL [udacity]>

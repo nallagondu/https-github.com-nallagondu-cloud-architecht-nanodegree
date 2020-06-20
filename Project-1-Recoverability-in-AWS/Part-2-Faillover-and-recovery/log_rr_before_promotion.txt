@@ -1,0 +1,118 @@
+ .ssh  ssh -i "cend-key-ohio.pem" ec2-user@ec2-18-191-58-204.us-east-2.compute.amazonaws.com    ✔
+
+The authenticity of host 'ec2-18-191-58-204.us-east-2.compute.amazonaws.com (18.191.58.204)' can't be established.
+ECDSA key fingerprint is SHA256:HuSNpwfEz1zKdzRpDTIKk3sXhqunPbDKnIXlxmvBa0g.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'ec2-18-191-58-204.us-east-2.compute.amazonaws.com,18.191.58.204' (ECDSA) to the list of known hosts.
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-ami/2018.03-release-notes/
+5 package(s) needed for security, out of 7 available
+Run "sudo yum update" to apply all updates.
+-bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
+[ec2-user@ip-10-2-11-48 ~]$ yum install mysql
+Failed to set locale, defaulting to C
+Loaded plugins: priorities, update-motd, upgrade-helper
+You need to be root to perform this command.
+[ec2-user@ip-10-2-11-48 ~]$ sudo yum install mysql
+Failed to set locale, defaulting to C
+Loaded plugins: priorities, update-motd, upgrade-helper
+Resolving Dependencies
+--> Running transaction check
+---> Package mysql.noarch 0:5.5-1.6.amzn1 will be installed
+--> Processing Dependency: mysql55 >= 5.5 for package: mysql-5.5-1.6.amzn1.noarch
+--> Running transaction check
+---> Package mysql55.x86_64 0:5.5.62-1.23.amzn1 will be installed
+--> Processing Dependency: real-mysql55-libs(x86-64) = 5.5.62-1.23.amzn1 for package: mysql55-5.5.62-1.23.amzn1.x86_64
+--> Processing Dependency: mysql-config for package: mysql55-5.5.62-1.23.amzn1.x86_64
+--> Running transaction check
+---> Package mysql-config.x86_64 0:5.5.62-1.23.amzn1 will be installed
+---> Package mysql55-libs.x86_64 0:5.5.62-1.23.amzn1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================================
+ Package                Arch             Version                        Repository              Size
+=====================================================================================================
+Installing:
+ mysql                  noarch           5.5-1.6.amzn1                  amzn-main              2.7 k
+Installing for dependencies:
+ mysql-config           x86_64           5.5.62-1.23.amzn1              amzn-updates            49 k
+ mysql55                x86_64           5.5.62-1.23.amzn1              amzn-updates           7.5 M
+ mysql55-libs           x86_64           5.5.62-1.23.amzn1              amzn-updates           816 k
+
+Transaction Summary
+=====================================================================================================
+Install  1 Package (+3 Dependent packages)
+
+Total download size: 8.3 M
+Installed size: 31 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/4): mysql-5.5-1.6.amzn1.noarch.rpm                                         | 2.7 kB  00:00:00
+(2/4): mysql-config-5.5.62-1.23.amzn1.x86_64.rpm                              |  49 kB  00:00:00
+(3/4): mysql55-libs-5.5.62-1.23.amzn1.x86_64.rpm                              | 816 kB  00:00:00
+(4/4): mysql55-5.5.62-1.23.amzn1.x86_64.rpm                                   | 7.5 MB  00:00:00
+-----------------------------------------------------------------------------------------------------
+Total                                                                 25 MB/s | 8.3 MB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : mysql55-libs-5.5.62-1.23.amzn1.x86_64                                             1/4
+  Installing : mysql-config-5.5.62-1.23.amzn1.x86_64                                             2/4
+  Installing : mysql55-5.5.62-1.23.amzn1.x86_64                                                  3/4
+  Installing : mysql-5.5-1.6.amzn1.noarch                                                        4/4
+  Verifying  : mysql-5.5-1.6.amzn1.noarch                                                        1/4
+  Verifying  : mysql-config-5.5.62-1.23.amzn1.x86_64                                             2/4
+  Verifying  : mysql55-libs-5.5.62-1.23.amzn1.x86_64                                             3/4
+  Verifying  : mysql55-5.5.62-1.23.amzn1.x86_64                                                  4/4
+
+Installed:
+  mysql.noarch 0:5.5-1.6.amzn1
+
+Dependency Installed:
+  mysql-config.x86_64 0:5.5.62-1.23.amzn1             mysql55.x86_64 0:5.5.62-1.23.amzn1
+  mysql55-libs.x86_64 0:5.5.62-1.23.amzn1
+
+Complete!
+[ec2-user@ip-10-2-11-48 ~]$  mysql -h database-read-replica.cs8zlqaqrdwr.us-east-2.rds.amazonaws.com -P 3306 -u admin -padmin123 udacity
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 20
+Server version: 5.7.22 Source distribution
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show tables;
++-------------------+
+| Tables_in_udacity |
++-------------------+
+| cend_test         |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from cend_test;
++----+----------------------+
+| id | value                |
++----+----------------------+
+|  1 | this works           |
+|  2 | adding another stmt  |
++----+----------------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into cend_test (value) values ("try in read replica");
+ERROR 1290 (HY000): The MySQL server is running with the --read-only option so it cannot execute this statement
+mysql>

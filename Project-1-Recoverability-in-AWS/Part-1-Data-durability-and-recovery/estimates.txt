@@ -1,0 +1,11 @@
+1. Minimum RTO for a single AZ outage
+    The RTO for a single AZ outage in our multi AZ setup is normally between 60 - 120 seconds. Referred from - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html
+
+2. Minimum RPO for a single AZ outage
+    Minimum RPO for recovery with an RDS Single-AZ outage failure is typically 5 minutes, this is normally the the interval required for copying transaction logs to Amazon S3. Referred from - https://aws.amazon.com/blogs/database/amazon-rds-under-the-hood-single-az-instance-recovery/
+
+3. Minimum RTO for a single region outage
+    Unlike MultiAZ Configuration, failover to read replica is not an automated process. Thus this process with human interference can take around 30 mins, where in the worst case scenario, the engineer on call would get a notification and he/she would react to the notification, by opening his/her laptop and promoting the read replica.  
+   
+4. Minimum RPO for a single region outage
+    The minimum RPO should be again 5 mins as the read replica gets synced up from the primary instance. 
