@@ -1,0 +1,25 @@
+
+# What additional architectural change can be made to reduce the internet facing attack surface of the web application instance.
+
+1. Perform vulnerability scanning at regular intervals and patch the OS on the instance.
+2. Enable MFA for logging in, such that even if API credentials are somehow leaked, attackers can't log in.
+3. Regularly scan exposed ports in the instance and close them off. 
+4. When using S3 as object store, use versioning, such that even if someone got access to S3 bucket and delete or modify files, the older versions can be restored. 
+
+# Assuming the IAM permissions for the S3 bucket are still insecure, would creating VPC private endpoints for S3 prevent the unauthorized access to the secrets bucket.
+
+Assuming that IAM permission consists of permissions to access secrets bucket, then creating VPC private endpoints for S3 also wouldn't prevent unauthorized access. VPC private endpoints are good for data transfer among AWS services, such that data can be transmitted over the private VPC network and not the public internet. 
+
+# Will applying default encryption setting to the s3 buckets encrypt the data that already exists?
+
+No, applying default encryption starts encrypting future objects which would be stored. TH older objects encryption is not changed. (Ref - https://aws.amazon.com/premiumsupport/knowledge-center/s3-existing-objects-default-encryption/)
+
+# What would happen if the original cloud formation templates are applied to this environment.
+
+So 3 things are important to understand here,
+
+1. The base infrasturture was created using cloudformation, so without actually changing the cloudformation template, the old template can't just be directly applied. Cloudformation would simply throw a message when you would try to perform update-stack that no change was detected in the cloudformation tempalte. 
+
+2. All the changes which are manually made via cli or console can be seen if we run drift detection. For eg. when we remove all the ingress rule and replace it with by 1 ingress rule from Load balancer SG to Web app SG, we can see these changes in the cloudformation console via drift detection results.
+
+3. If we still update and add new resource in the cloudformation template and update the stack then the new resource would appear and the old resources wouldnt be applied back. 

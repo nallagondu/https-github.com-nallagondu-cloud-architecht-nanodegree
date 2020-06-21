@@ -1,0 +1,8 @@
+# Describe GuardDuty findings that were detected related to the brute force attack
+
+There were 2 findings generated within guarddut, one with low severity and one with high severity. Guardduty, provided with the instance id and the ip address where the attack is generated and where the attack is targeted.
+
+# Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information. 
+
+
+Based on the documentation (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_unauthorized.html#unauthorized9) provided by GuardDuty for sshBruteForce, it describes that if the attack is performed using victims instances then the severity is high, which makes sense as well. Also, this attack is only detected when port 22 is used for ssh, if ssh is configured on some other port, this attack type is not detected. 

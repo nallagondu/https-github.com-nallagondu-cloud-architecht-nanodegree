@@ -1,0 +1,23 @@
+# Identify tools that will allow you to do the following:
+
+## Scan infrastructure as code templates
+CFRipper - Library and CLI tool for analysing CloudFormation templates and check them for security compliance.
+https://github.com/Skyscanner/cfripper/
+
+### Example vulnerability
+IAM role provides access to read, write and modify all resource
+
+##Scan AMI’s or containers for OS vulnerabilities
+AWS Inspector - analyze and report on vulnerabilities on EC2 instances.
+Clair - open source project for the static analysis of vulnerabilities in application containers
+https://github.com/quay/clair
+
+### Example vulnerability
+Bug in OS gives access to the instance to remote attacker
+
+##Scan an AWS environment for cloud configuration vulnerabilities
+AWS Config, AWS SecurityHub
+
+### Example vulnerability
+SSH port 22 open for everyone
+S3 bucket doesnt have server-side encryption

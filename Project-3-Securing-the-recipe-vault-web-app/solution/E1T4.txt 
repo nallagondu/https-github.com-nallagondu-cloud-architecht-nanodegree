@@ -1,0 +1,9 @@
+Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
+
+# Poor practice 1
+
+The first obvious bad practice employed in the architecture is to deploy the application web service instance in the public subnet, it should be deployed in the private subnet and at the same time the public access to the WebAppSG should be removed and only ingress should be from AppLoadBalancerSG. The open nature of the WebAppSG means anyone wiht malicious intent may not only try and gain access, its an open invitation for attackers to DDOS it.
+
+# Poor practice 2
+
+ The secret recipe needs to be really secret, even though public read and write access are blocked by default,still in order to really protect the secret recipe, all public access should be blocked on the bucket settings. At the same time, basic server-side encryption should be enabled to add one more layer of security.

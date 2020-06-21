@@ -1,0 +1,11 @@
+
+
+# Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+
+1. Move the web application instance to the private subnet, that would prevent direct internet based brute force attack. 
+2. Enable a WAF in front of the load balancer, such that suspicious ips, bots, and other malicious users can be throttled.
+3. Also, harden instances such that ssh password login is not allowed, and vulnerabilities updates are patched regularly.
+
+# Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
+
+IAM Instance roles should not have permissions to read sensitive data, always follow the principle of least priviledge. This will make sure that actors who shouldnt have access to sensitive data, wont have access to sensitive data. 

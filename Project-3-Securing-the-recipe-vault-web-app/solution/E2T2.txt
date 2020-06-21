@@ -1,0 +1,11 @@
+Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+
+Bonus - provide recommendations on how to remediate the vulnerabilities.
+
+
+Solution:
+
+The vulnerabilities which relate to the deployed cloudformtion code are related to EC2 instance security group access and not setting up server-side encryption or enforcing encryption for data in S3 bucket. 
+
+To remediate the vulnerabilities, the best practice would be to move the web application in the private subnet and allow only ApplicationLoadBalancerSG to access the application instance. This would effectively remove all access related issues. 
+Also, we should enable server-side encryption for S3 buckets. 
