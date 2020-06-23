@@ -1,0 +1,15 @@
+Group hierarchy,Region,Service,Upfront,Monthly,First 12 months total,Currency,Configuration summary
+"My Estimate,US East (N. Virginia),Amazon EC2,0,8647.810000000001,103773.72,USD,""Operating system (Linux), Quantity (64), Storage for each EC2 instance (General Purpose SSD (gp2)), Storage amount (100 GB), Instance type (c6g.2xlarge)"""
+"My Estimate,US East (N. Virginia),Amazon Aurora MySQL-Compatible,0,5619.2,67430.40,USD,""Change records per statement (0.38), (4 instances)  db.r5.4xlarge  Memory optimized  Reserved Instances  1yr  No Upfront, Storage amount (10000 GB), Additional backup storage (10000 GB)"""
+My Estimate,US East (N. Virginia),S3 Standard,0,2394,28728.00,USD,S3 Standard storage (100 TB per month)
+"My Estimate,US East (N. Virginia),Data Transfer,0,0,0.00,USD,""Data Transfer, Data transfer cost (0)"""
+My Estimate,US East (N. Virginia),Elastic Load Balancing,0,1200.85,14410.20,USD,Number of Application Load Balancers (2)
+My Estimate,US East (N. Virginia),Amazon Route 53,0,261.5,3138.00,USD,Hosted Zones (3)
+My Estimate,US East (N. Virginia),Amazon Virtual Private Cloud (VPC),0,70.2,842.40,USD,Number of NAT Gateways (2)
+
+
+
+AWS Pricing Calculator provides only an estimate of your AWS fees and doesn't include any taxes that might apply. Your actual fees depend on a variety of factors, including your actual usage of AWS services.
+
+
+The Increased cost estimate increases the number of EC2 instances which would be spawned by the auto scaling group when our social media website gets more popular and we need to handle the large user base, with that the RDS have 4 nodes so that its multi AZ, multi region such that it can handle failures as well as serve as read replicas. Also, the high number of users may use more S3 storage for storing images and videos and thus the storage space estimate has also been increased. 
